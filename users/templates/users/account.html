@@ -56,9 +56,7 @@
           <p class="devInfo__about">{{profile.bio}}</p>
         </div>
         <div class="settings">
-          <h3 class="settings__title">Skills</h3>
-          <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-skill' %}"><i
-              class="im im-plus"></i> Add Skill</a>
+
         </div>
 
         <table class="settings__table">
@@ -82,26 +80,26 @@
         </table>
 
         <div class="settings">
-          <h3 class="settings__title">Projects</h3>
-          <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-project' %}"><i
-              class="im im-plus"></i> Add Project</a>
+          <h3 class="settings__title">Products</h3>
+          <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create-product' %}"><i
+              class="im im-plus"></i> Add Product</a>
         </div>
 
         <table class="settings__table">
-          {% for project in projects %}
+          {% for product in products %}
           <tr>
             <td class="settings__thumbnail">
-              <a href="{% url 'project' project.id %}"><img src="{{project.imageURL}}" alt="Project Thumbnail" /></a>
+              <a href="{% url 'product' product.id %}"><img src="{{product.imageURL}}" alt="Product Thumbnail" /></a>
             </td>
             <td class="settings__tableInfo">
-              <a href="{% url 'project' project.id %}">{{project.title}}</a>
-              <p>{{project.description|slice:"150"}}</p>
+              <a href="{% url 'product' product.id %}">{{product.title}}</a>
+              <p>{{product.description|slice:"150"}}</p>
             </td>
             <td class="settings__tableActions">
-              <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-project' project.id %}"><i
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'update-product' product.id %}"><i
                   class="im im-edit"></i> Edit</a>
               <a class="tag tag--pill tag--main settings__btn"
-                href="{% url 'delete-project'  project.id %}?next=/account"><i class="im im-x-mark-circle-o"></i>
+                href="{% url 'delete-product'  product.id %}?next=/account"><i class="im im-x-mark-circle-o"></i>
                 Delete</a>
             </td>
           </tr>

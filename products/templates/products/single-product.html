@@ -52,7 +52,7 @@
                     <p>You have already submitted your review for this product</p>
 
                     {% elif request.user.profile == product.owner %}
-                    <p>You cannot review your own work</p>
+                    <p>You cannot review your own product</p>
 
                     {% elif request.user.is_authenticated %}
                     <form class="form" action="{% url 'product' product.id %}" method="POST">
