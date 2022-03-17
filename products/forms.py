@@ -8,7 +8,7 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ['title', 'featured_image', 'description',
-                  'demo_link', 'source_link']
+                  'demo_link', 'quantity']
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),
         }
