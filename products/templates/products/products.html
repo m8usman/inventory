@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+{% block content %}
+
+
+<!-- Main Section -->
+<main class="products">
+    <section class="hero-section text-center">
+        <div class="container container--narrow">
+            <div class="hero-section__box">
+                <h2>Search for <span>Products</span></h2>
+            </div>
+
+            <div class="hero-section__search">
+                <form id='searchForm' class="form" action="{% url 'products' %}" method="get">
+                    <div class="form__field">
+                        <label for="formInput#search">Search By Products </label>
+                        <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                            placeholder="Search by Product Title" value="{{search_query}}" />
+                    </div>
+
+                    <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="productsList">
+        <div class="container">
+            <div class="grid grid--three">
+
+                {% for product in products %}
+                <div class="column">
+                    <div class="card product">
+                        <a href="{% url 'product' product.id %}" class="product">
+                            <img class="product__thumbnail" src="{{product.imageURL}}" alt="product thumbnail" />
+                            <div class="card__body">
+                                <h3 class="product__title">{{product.title}}</h3>
+                                <p><a class="product__author" href="{% url 'user-profile' product.owner.id %}">By
+                                        {{product.owner.name}}</a>
+                                </p>
+                                <p class="product--rating">
+                                    <span style="font-weight: bold;">{{product.vote_ratio}}%</span> Positive
+                                    Feedback ({{product.vote_total}}) Vote{{product.vote_total|pluralize:"s"}}
+                                </p>
+                                <div class="product__tags">
+                                    {% for tag in product.tags.all %}
+                                    <span class="tag tag--pill tag--main">
+                                        <small>{{tag}}</small>
+                                    </span>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+    {% include 'pagination.html' with queryset=products custom_range=custom_range %}
+
+</main>
+
+
+
+
+{% endblock %}
