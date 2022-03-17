@@ -14,6 +14,8 @@
                         <small>{{tag}}</small>
                     </span>
                     {% endfor %}
+                    <br><br><br><br>
+                    <h4 class="singleProduct__subtitle">Quantity: {{product.quantity}}</h4>
 
                 </div>
 
@@ -41,55 +43,7 @@
                 <div class="singleProduct__info">
                     {{product.description}}
                 </div>
-                <div class="comments">
-                    <h3 class="singleProduct__subtitle">Feedback</h3>
-                    <h5 class="product--rating">
-                        {{product.vote_ratio}}% Positive Feedback ({{product.vote_total}}
-                        Vote{{product.vote_total|pluralize:"s"}})
-                    </h5>
 
-                    {% if request.user.profile.id in product.reviewers %}
-                    <p>You have already submitted your review for this product</p>
-
-                    {% elif request.user.profile == product.owner %}
-                    <p>You cannot review your own product</p>
-
-                    {% elif request.user.is_authenticated %}
-                    <form class="form" action="{% url 'product' product.id %}" method="POST">
-                        {% csrf_token %}
-                        {% for field in form %}
-                        <div class="form__field">
-                            <label for="formInput#textarea">{{field.label}}</label>
-                            {{field}}
-                        </div>
-                        {% endfor %}
-                        <input class="btn btn--sub btn--lg" type="submit" value="Add Review" />
-                    </form>
-                    {% else %}
-                    <a href="{% url 'login' %}?next={{request.path}}">Please login to leave a review</a>
-                    {% endif %}
-
-                    <div class="commentList">
-                        {% for review in product.review_set.all %}
-                        {% if review.body %}
-                        <div class="comment">
-                            <a href="{% url 'user-profile' review.owner.id  %}">
-                                <img class="avatar avatar--md" src="{{review.owner.profile_image.url}}" alt="user" />
-                            </a>
-
-
-                            <div class="comment__details">
-                                <a href="{% url 'user-profile' review.owner.id  %}"
-                                    class="comment__author">{{review.owner.name}}</a>
-                                <p class="comment__info">{{review.body|linebreaksbr}}</p>
-                            </div>
-
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -35,13 +35,13 @@
                             <img class="product__thumbnail" src="{{product.imageURL}}" alt="product thumbnail" />
                             <div class="card__body">
                                 <h3 class="product__title">{{product.title}}</h3>
-                                <p><a class="product__author" href="{% url 'user-profile' product.owner.id %}">By
+                                <p><a class="product__author" href="{% url 'user-profile' product.owner.id %}">
                                         {{product.owner.name}}</a>
                                 </p>
-                                <p class="product--rating">
-                                    <span style="font-weight: bold;">{{product.vote_ratio}}%</span> Positive
-                                    Feedback ({{product.vote_total}}) Vote{{product.vote_total|pluralize:"s"}}
-                                </p>
+
+                    <p class="product--rating">
+                    <span style="font-weight: bold;">Quantity: </span>  {{product.quantity}}
+                    </p>
                                 <div class="product__tags">
                                     {% for tag in product.tags.all %}
                                     <span class="tag tag--pill tag--main">
